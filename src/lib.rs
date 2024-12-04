@@ -18,6 +18,8 @@ mod tests {
   #[test]
   fn test_remove_formatting() {
     assert_eq!(remove_formatting("Καλημέρα".to_string()), "Kalemera");
+    // 'Ηθος and Έθος are two different words with different meaning. 
+    // They should not be decoded to the same latin characters word Ethos.
     assert_eq!(remove_formatting("Ήθος".to_string()), "Ethos");
     assert_eq!(remove_formatting("Έθος".to_string()), "Ethos");
     assert_eq!(remove_formatting("Χριστίνα".to_string()), "Khristina");
