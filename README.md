@@ -17,6 +17,10 @@ To compile:
 2. `bundle install`
 3. `bundle exec rake compile`
 
+To build and install locally:
+1. gem build unidecode_rust.gemspec
+2. gem install unidecode_rust-0.1.0.gem
+
 To try it out:
 1. `bin/console`
 ```
