@@ -1,6 +1,6 @@
 # unidecode_rust
 
-This is an experiment at moving our fork of the Ruby
+This is an experiment at replacing the Ruby
 stringex gem to a new gem that uses the unidecode rust
 crate.
 
@@ -22,8 +22,8 @@ To build and install locally:
 2. gem install unidecode_rust-0.1.0.gem
 
 To try it out:
-1. `bin/console`
+1. `bundle exec rake console`
 ```
-irb(main):001:0> remove_formatting 'Καλημέρα'
+irb(main):001:0> Unidecoder.unidecode 'Καλημέρα'
 => "Kalemera"
 ```

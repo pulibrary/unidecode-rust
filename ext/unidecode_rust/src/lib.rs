@@ -1,13 +1,13 @@
-use magnus::{function, Error, Ruby};
-use unidecode::unidecode;
+use magnus::{function, Error, Ruby, Object};
 
-fn remove_formatting(a: String) -> String {
-  unidecode(&a)
+fn unidecode(a: String) -> String {
+  unidecode::unidecode(&a)
 }
 
 #[magnus::init]
 fn init(ruby: &Ruby) -> Result<(), Error> {
-  ruby.define_global_function("remove_formatting", function!(remove_formatting, 1));
+  let module = ruby.define_module("Unidecoder")?;
+  module.define_singleton_method("unidecode", function!(unidecode, 1))?;
   Ok(())
 }
 
@@ -16,13 +16,13 @@ mod tests {
   use super::*;
 
   #[test]
-  fn test_remove_formatting() {
-    assert_eq!(remove_formatting("ø".to_string()), "o");
-    assert_eq!(remove_formatting("Καλημέρα".to_string()), "Kalemera");
+  fn test_unidecode() {
+    assert_eq!(unidecode("ø".to_string()), "o");
+    assert_eq!(unidecode("Καλημέρα".to_string()), "Kalemera");
     // 'Ηθος and Έθος are two different words with different meaning. 
     // They should not be decoded to the same latin characters word Ethos.
-    assert_eq!(remove_formatting("Ήθος".to_string()), "Ethos");
-    assert_eq!(remove_formatting("Έθος".to_string()), "Ethos");
-    assert_eq!(remove_formatting("Χριστίνα".to_string()), "Khristina");
+    assert_eq!(unidecode("Ήθος".to_string()), "Ethos");
+    assert_eq!(unidecode("Έθος".to_string()), "Ethos");
+    assert_eq!(unidecode("Χριστίνα".to_string()), "Khristina");
   }
 }

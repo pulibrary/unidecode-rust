@@ -11,4 +11,5 @@ Gem::Specification.new do |spec|
 
   # only needed when developing or packaging your gem
   spec.add_development_dependency "rake-compiler", "~> 1.2.0"
+  spec.add_development_dependency "rspec"
 end
